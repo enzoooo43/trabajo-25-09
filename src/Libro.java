@@ -12,19 +12,20 @@ public class Libro {
     private String autor;
     private String isbn;
     private String anioPublicacion;
-    private Integer stock;
+    private int stock;
 
-    public Libro() {
 
-    }
-
-    public Libro(Long idLibro, String titulo, String autor, String isbn, String anioPublicacion, Integer stock) {
+    public Libro(Long idLibro, String titulo, String autor, String isbn, String anioPublicacion, int stock) {
         this.idLibro = idLibro;
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
         this.anioPublicacion = anioPublicacion;
         this.stock = stock;
+    }
+
+    public Libro(){
+
     }
 
     public Long getIdLibro() {
@@ -67,24 +68,23 @@ public class Libro {
         this.anioPublicacion = aniopublicacion;
     }
 
-    public Integer getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(Integer stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 
     public void mostrarinformacion() {
         System.out.println("Id : " + this.idLibro +
-                "\n titulo: "+ this.titulo +
-                "\n autor: "+ this.autor +
-                "\n isbn: "+ this.isbn +
-                "\n añopublicación: "+ this.anioPublicacion +
-                "\n stock: "+ this.stock);
+                "\n titulo: " + this.titulo +
+                "\n autor: " + this.autor +
+                "\n isbn: " + this.isbn +
+                "\n añopublicación: " + this.anioPublicacion +
+                "\n stock: " + this.stock);
     }
 
-    public void  disminuirStock(){}
 
     @Override // pepito wallace was here :D
     public String toString() {
@@ -108,5 +108,7 @@ public class Libro {
         if (this.stock > 0) {
             this.stock++;
         }
+
+
     }
 }

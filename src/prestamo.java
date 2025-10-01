@@ -1,18 +1,16 @@
 import java.util.Date;
 
 public class Prestamo {
+    private static long nextId = 0;
     private Long idPrestamo;
     private Date fechaPrestamo;
     private Date fechaDevolucion;
-    private String estado; // "Activo" o "Devuelto"
+    private Estado estado;
     private Usuario usuario;
     private Libro libro;
 
-    public Prestamo() {
-    }
-
-    public Prestamo(Long idPrestamo, Date fechaPrestamo, Date fechaDevolucion, String estado, Usuario usuario, Libro libro) {
-        this.idPrestamo = idPrestamo;
+    public Prestamo(Date fechaPrestamo, Date fechaDevolucion, Estado estado, Usuario usuario, Libro libro) {
+        this.idPrestamo = nextId++;
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
         this.estado = estado;
@@ -20,12 +18,11 @@ public class Prestamo {
         this.libro = libro;
     }
 
-    public Long getIdPrestamo() {
-        return idPrestamo;
-    }
-
-    public void setIdPrestamo(Long idPrestamo) {
-        this.idPrestamo = idPrestamo;
+    public Prestamo(Date fechaPrestamo, Estado estado, Usuario usuario, Libro libro) {
+        this.fechaPrestamo = fechaPrestamo;
+        this.estado = estado;
+        this.usuario = usuario;
+        this.libro = libro;
     }
 
     public Date getFechaPrestamo() {
@@ -44,11 +41,11 @@ public class Prestamo {
         this.fechaDevolucion = fechaDevolucion;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -68,30 +65,39 @@ public class Prestamo {
         this.libro = libro;
     }
 
-    public void registrarPrestamo() {
-        this.estado = "Activo";
-        this.fechaPrestamo = new Date(); // fecha actual
+    @Override
+    public String toString() {
+        return "Prestamo{" +
+                "idPrestamo=" + idPrestamo +
+                ", fechaPrestamo=" + fechaPrestamo +
+                ", fechaDevolucion=" + fechaDevolucion +
+                ", estado=" + estado +
+                ", usuario=" + usuario +
+                ", libro=" + libro +
+                '}';
+    }
+
+    public void registrarPrestamo(){
+        this.estado = Estado.ACTIVO;
         libro.disminuirStock();
     }
 
-    public void registrarDevolucion() {
-        this.estado = "Devuelto";
-        this.fechaDevolucion = new Date(); // fecha actual
+    public void registrarDevolucion(){
+        this.estado = Estado.DEVUELTO;
+        this.fechaDevolucion = new Date();
         libro.aumentarStock();
     }
 
     public void mostrarDetalle() {
-        System.out.println("------ DETALLE DEL PRÉSTAMO ------");
-        System.out.println("ID Préstamo: " + idPrestamo);
-        System.out.println("Estado: " + estado);
-        System.out.println("Fecha Préstamo: " + fechaPrestamo);
-        if (fechaDevolucion != null) {
-            System.out.println("Fecha Devolución: " + fechaDevolucion);
-        }
-        System.out.println("\n-- Datos del Usuario --");
-        usuario.mostrarDatos();
-        System.out.println("\n-- Datos del Libro --");
-        libro.mostrarDatos();
-        System.out.println("----------------------------------\n");
+        System.out.println("Id : " + nextId +
+                "\n Fecha prestamo: " + this.fechaPrestamo +
+                "\n Fecha devolución: " + this.fechaDevolucion +
+                "\n estado: " + this.estado +
+                "\n usuario: " + this.usuario +
+                "\n libro: " + this.libro);
     }
+
 }
+
+
+

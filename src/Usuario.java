@@ -1,4 +1,5 @@
 public class Usuario {
+    private static long nextId = 0;
     private Long idUsuario;
     private String rut;
     private String nombre;
@@ -6,12 +7,8 @@ public class Usuario {
     private String email;
     private String telefono;
 
-
-    public Usuario() {
-    }
-
-    public Usuario(Long idUsuario, String rut, String nombre, String apellido, String email, String telefono) {
-        this.idUsuario = idUsuario;
+    public Usuario(String rut, String nombre, String apellido, String email, String telefono) {
+        this.idUsuario = nextId++;
         this.rut = rut;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -19,9 +16,12 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-
-    public Long getIdUsuario() {
-        return idUsuario;
+    public Usuario(String rut, String nombre, String apellido, String email) {
+        this.idUsuario = idUsuario;
+        this.rut = rut;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
     }
 
     public void setIdUsuario(Long idUsuario) {
@@ -68,15 +68,29 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-
     public void mostrarDatos() {
-        System.out.println("Usuario: " + nombre + " " + apellido);
-        System.out.println("RUT: " + rut);
-        System.out.println("Email: " + email);
-        System.out.println("Teléfono: " + (telefono != null ? telefono : "No registrado"));
+        System.out.println("Id : " + nextId +
+                "\n rut: " + this.rut +
+                "\n nombre: " + this.nombre +
+                "\n apellido: " + this.apellido +
+                "\n email: " + this.email +
+                "\n telefono: " + this.telefono);
+    }
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUsuario=" + nextId +
+                ", rut='" + rut + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", email='" + email + '\'' +
+                ", telefono='" + telefono + '\'' +
+                '}';
     }
 
-    public void actualizarEmail(String nuevoEmail) {
+    public void actualizarEmail(String nuevoEmail){
         this.email = nuevoEmail;
+
     }
+
 }
